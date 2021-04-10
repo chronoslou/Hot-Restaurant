@@ -2,7 +2,7 @@ const express = require ('express');
 const path = require('path'); 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -14,3 +14,11 @@ const customers = [
 
     
 ]
+
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/home.html')));
+
+app.get('/reserve', (req, res) => res.sendFile(path.join(__dirname, 'public/reserve.html')));
+
+app.get('/tables', (req, res) => res.sendFile(path.join(__dirname, 'public/tables.html')));
+
+app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
