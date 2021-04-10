@@ -38,16 +38,7 @@
             </div>
             <div class="card-body">
               <ul id="tableList" class="list-group">
-                  <li class="list-group-item mt-4">
-
-                    JS fetch request to api to get table data 
-                      <h2>Table #1</h2>
-                      <hr>
-                      <h2>ID: afhaque89</h2>
-                      <h2>Name: Ahmed</h2>
-                      <h2>Email: ahmed@example.com</h2>
-                      <h2>Phone: 000-000-0000</h2>
-                    </li>
+                  
             </div>
           </div>
   
@@ -59,12 +50,12 @@
             <div class="card-body">
               <ul id="waitList" class="list-group">
                   <li class="list-group-item mt-4">
-                      <h2>Table #1</h2>
+                      <!-- <h2>Table #1</h2>
                       <hr>
                       <h2>ID: saimaCool</h2>
                       <h2>Name: Saima</h2>
                       <h2>Email: saima@example.com</h2>
-                      <h2>Phone: 000-000-0000</h2>
+                      <h2>Phone: 000-000-0000</h2> -->
                     </li>
             </div>
           </div>
@@ -84,7 +75,36 @@
       </footer>
   </div>
   <script type="text/javascript">
-  get request to api
+  // get request to api
+  const generateHTML = () => {
+    fetch('/api/tables/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((array) => {
+            console.log(array);
+          for (let i = 0; i < array.length; i++) {
+            let tableList = document.getElementById("tableList")
+            let listItem = document.createElement("li")
+            listItem.classList.add("list-group-item mt-4"); 
+            let element = document.createElement("h2")
+            element.textContent = `${array[i].customerName}`;
+            element.textContent = `${array[i].customerEmail}`;
+            element.textContent = `${array[i].customerID}`;
+            element.textContent = `${array[i].phoneNumber}`;
+            tableList.appendChild(listItem);
+          }
+
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+  };
+  generateHTML(); 
   </script>
 </body>
 
